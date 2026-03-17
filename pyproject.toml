@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "js-jecats-paper"
+version = "0.1.0"
+description = "Climate-optimised flight trajectories"
+authors = [
+    { name = "Jakob Smretschnig", email = "j.smretschnig@tudelft.nl" }
+]
+readme = "README.md"
+requires-python = ">=3.11"
+
+dependencies = [
+    "fastparquet>=2024.11.0",
+    "jupyterlab>=4.0.11",
+    "matplotlib>=3.8.2",
+    "mpi4py>=4.0.3",
+    "numpy>=1.26.1",
+    "pandas>=2.2.3",
+    "pyarrow>=17.0.0",
+    "pycontrails>=0.54.10",
+#    "pycontrails-bada>=0.7.7",
+    "seaborn>=0.13.2",
+    "tqdm>=4.66.2",
+    "xarray>=2024.10.0"
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
