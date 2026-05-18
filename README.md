@@ -21,8 +21,9 @@ Runtime on DelftBlue:
 
 ### Action items
 
-- [ ] Get all notebooks producing figures working in this repo
-- [ ] Rename the flight IDs and remove callsigns and engine IDs
+- [x] Get all notebooks producing figures working in this repo
+- [ ] Move the notebooks for tables and RQs as well
+- [ ] Make the path to the data clear
 
 ---
 
