@@ -1,34 +1,12 @@
-# JetBrains
 .idea/
 
-# VENV
 .venv
 
-# Files
-**.pyc
-**/.DS_Store
-*.png
-*.csv
-*.xlsx
-*.parquet
-*.pq
-*.gz
-*.nc
-*.txt
-*.dat
-*.json
+/src/cane.egg-info
+/data
 
-# Directories
+**.pyc
+*.png
+
 data/
 reports/
-
-# TOML
-build/
-*.egg-info
-js_jecats_paper.egg-info/
-
-# Part of the system
-!src/metrics/static/
-!src/metrics/static/dahlmann-2025.csv
-!src/airspaces/static/
-!src/airspaces/static/Borealis_airspaces.json
