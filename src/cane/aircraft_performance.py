@@ -3,7 +3,14 @@ import pandas as pd
 from pycontrails.core import Flight as PyFlight
 from pycontrails.ext.bada import BADAFlight
 
-bada_3_path = ""  # TODO insert path
+import enum
+class APModel(enum.Enum):
+    BADA3 = "BADA3"
+    BADA4 = "BADA4"
+    PollSchumann = "Poll-Schumann"
+    OpenAP = "OpenAP"
+
+bada_3_path = "/Users/jsmretschnig/Library/CloudStorage/OneDrive-DelftUniversityofTechnology/Database/BADA 3.16/bada_316_80ddb12010d1cfc55fc7"
 
 
 def verify_mass(masses: pd.Series):
@@ -78,3 +85,46 @@ def run_bada3_fuel_flow(df: pd.DataFrame):
         print("ERROR", flight_id, e)
 
     return df
+
+def get_sub_fleet(df: pd.DataFrame, model: APModel) -> pd.DataFrame:
+    tmp = df.copy().assign(APModel=model.value)
+    tmp = tmp.rename(columns={
+        "fuel_flow": "fuel_flow_old",
+        "total_fuel_burn": "total_fuel_burn_old",
+    })
+    return tmp.rename(columns={
+        f"{model.value}_aircraft_mass": "aircraft_mass",
+        f"{model.value}_fuel_flow": "fuel_flow",
+        f"{model.value}_engine_efficiency": "engine_efficiency"
+    })
+
+
+def get_wing_span(typecode: str, bada_3_path: str) -> str:
+    try:
+        wingspan = (
+            BADAFlight(bada3_path=bada_3_path)
+            .get_bada(typecode)
+            .get_aircraft_params(typecode)
+            .wing_span
+        )
+    except:
+        raise ValueError(f"Wing span for {typecode} not found.")
+    return wingspan
+
+
+def get_fleet_attributes(df: pd.DataFrame, bada_3_path: str) -> dict:
+    """
+        Get a dictionary of fleet attributes: aircraft_type, wingspan
+        Wingspan is determined based on OpenAP (if available), or otherwise using BADA3
+        :param df:
+        :param bada_3_path:
+        :return: dict
+    """
+    agg_dict = {"typecode": "first"}
+    if "APModel" in df.columns:
+        agg_dict["APModel"] = "first"
+    fleet_attributes = df.groupby("flight_id").agg(agg_dict).rename(columns={"typecode": "aircraft_type"}).reset_index()
+    fleet_attributes["wingspan"] = fleet_attributes.apply(
+        lambda d: get_wing_span(d["aircraft_type"], bada_3_path), axis=1
+    )
+    return fleet_attributes.set_index("flight_id").to_dict(orient="index")
