@@ -66,6 +66,8 @@ pip install --index-url https://us-central1-python.pkg.dev/contrails-301217/pyco
 
 More details [here](https://py.contrails.org/install.html#bada).
 
+When using VS Code, make sure to select the venv's Python interpreter: Open the command palette (`Cmd+Shift+P` / `Ctrl+Shift+P`) → Python: Select Interpreter → choose the one pointing to `.venv/bin/python`.
+
 ---
 
 ## 🤝 Contributing
