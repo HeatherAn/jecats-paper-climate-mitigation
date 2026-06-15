@@ -1,8 +1,8 @@
 # CANE - Contrail Avoidance Non-CO2 Evaluation
 
-> This is a repository to evaluate the effect of contrail avoidance on the total mitigation gain (CO2, Contrails, NOx, H2O).
+> This is a repository to evaluate the effect of contrail avoidance on the net climate benefit, considering CO2, contrails, NOx, and H2O.
 
-> 4,112 flights traversing the Borealis region in 2023 are considered.
+> 4,112 flights traversing the Borealis region (Northern Europe) in 2023 are considered.
 
 > Data accompanying the repository is available on [4TU.ResearchData]().
 
@@ -23,7 +23,7 @@ Runtime on DelftBlue:
 
 - [x] Get all notebooks producing figures working in this repo
 - [ ] Move the notebooks for tables and RQs as well
-- [ ] Make the path to the data clear
+- [x] Make the path to the data clear
 
 ---
 
@@ -68,6 +68,26 @@ pip install --index-url https://us-central1-python.pkg.dev/contrails-301217/pyco
 More details [here](https://py.contrails.org/install.html#bada).
 
 When using VS Code, make sure to select the venv's Python interpreter: Open the command palette (`Cmd+Shift+P` / `Ctrl+Shift+P`) → Python: Select Interpreter → choose the one pointing to `.venv/bin/python`.
+
+---
+
+## 🔢 Data
+
+### ✈️ Trajectory data and simulation output
+
+- Data accompanying the repository is available on 4TU.ResearchData.
+- DOI: [10.4121/16ec2954-a493-41c8-b3f9-f17e9331c46b](https://10.4121/16ec2954-a493-41c8-b3f9-f17e9331c46b)
+
+### 🌐 Tropopause data
+
+- Hoffmann, L. and R. Spang, Reanalysis Tropopause Data Repository, DOI: [10.26165/JUELICH-DATA/UBNGI2](https://doi.org/10.26165/JUELICH-DATA/UBNGI2), Jülich DATA, V1, 2021.
+- Download the ERA5 tropopause data for Fig. 6 [here](https://datapub.fz-juelich.de/slcs/tropopause/index.html).
+
+### 🌤️ Weather data
+
+- Copernicus Climate Change Service, Climate Data Store, (2023): **ERA5 hourly data on pressure levels from 1940 to present**. Copernicus Climate Change Service (C3S) Climate Data Store (CDS). DOI: [10.24381/cds.bd0915c6](https://doi.org/10.24381/cds.bd0915c6) (Accessed on 15-06-2026)
+
+- Copernicus Climate Change Service, Climate Data Store, (2023): **ERA5 hourly data on single levels from 1940 to present**. Copernicus Climate Change Service (C3S) Climate Data Store (CDS). DOI: [10.24381/cds.adbb2d47](https://doi.org/10.24381/cds.bd0915c6) (Accessed on 15-06-2026)
 
 ---
 
