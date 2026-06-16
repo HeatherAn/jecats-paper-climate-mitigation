@@ -108,6 +108,8 @@ Directory structure of `cane`:
 └── notebooks
 │   └── figure-*.ipynb
 │   ├── logo.ipynb
+│   ├── rq*.ipynb
+│   ├── table-*.ipynb
 └── src
     └── cane
         └── airspaces
@@ -128,6 +130,8 @@ Directory structure of `cane`:
 
 - `notebooks/figure-*.ipynb`: Each notebook represents one figure of the paper.
 - `notebooks/logo.ipynb`: A notebook to plot the logo of the repository.
+- `notebooks/rq*.ipynb`: Each notebook represents the numerical results for a research question.
+- `notebooks/table*.ipynb`: Each notebook represents a table of the paper.
 - `src/cane/airspaces/*`: To visualize the boundaries of the Borealis airspaces.
 - `src/cane/*`: Helpers for coloring, constants, friendly names, haul-type classification etc.
 - `src/cane/sankey.py`: This is a [pySankey](https://github.com/anazalea/pySankey/tree/master) fork with some bug-fixes.
