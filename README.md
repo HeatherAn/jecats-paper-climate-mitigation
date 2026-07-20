@@ -111,7 +111,6 @@ When using VS Code, make sure to select the venv's Python interpreter: Open the 
     │   │       └── Borealis_airspaces.json
     │   ├── colors.py
     │   ├── constants.py
-    │   ├── era5.py
     │   ├── labels.py
     │   ├── metrics
     │   │   ├── __init__.py
@@ -121,7 +120,8 @@ When using VS Code, make sure to select the venv's Python interpreter: Open the 
     │   ├── models
     │   │   ├── accf.py
     │   │   ├── aircraft_performance.py
-    │   │   └── cocip.py
+    │   │   ├── cocip.py
+    │   │   └── era5.py
     │   └── utils.py
 ```
 
@@ -129,7 +129,13 @@ When using VS Code, make sure to select the venv's Python interpreter: Open the 
 - `notebooks/logo.ipynb`: A notebook to plot the logo of the repository.
 - `notebooks/rq*.ipynb`: Each notebook represents the numerical results for a research question.
 - `notebooks/table*.ipynb`: Each notebook represents a table of the paper.
+- `scripts/*`: Bash scripts to run aCCFs and CoCiP on a High-Performance-Computer (HPC), such as DelftBlue.
 - `src/cane/airspaces/*`: To visualize the boundaries of the Borealis airspaces.
+- `src/cane/metrics/*`: Compute the climate effect in different climate metrics.
+- `src/cane/models/accf.py`: Compute the aCCFs for CO2, NOx, and H2O.
+- `src/cane/models/aircraft_performance.py`: Compute the fuel consumption with BADA3.
+- `src/cane/models/cocip.py`: Contains a helper for the CoCiP configuration.
+- `src/cane/models/era5.py`: Download meteorological data from ERA5.
 - `src/cane/*`: Helpers for coloring, constants, friendly names, haul-type classification etc.
 
 Don't forget to fork [pySankey](https://github.com/anazalea/pySankey/tree/master) and remove the `check_data_matches_labels` part for the labels on the right side of the diagram in the code.
