@@ -24,7 +24,7 @@ path = f"{os.getenv('HOME')}/gitlab/jecats-paper-climate-mitigation/scripts"
 from pycontrails.core import Fleet
 from pycontrails import MetDataset, MetDataArray
 
-from cane import era5
+from cane.models import era5
 from cane.utils import get_lat_lon_bounds
 from cane.models.accf import ACCF as FastACCF
 
