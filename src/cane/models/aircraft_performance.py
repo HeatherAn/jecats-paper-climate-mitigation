@@ -3,7 +3,6 @@ from pycontrails.physics.jet import fuel_burn
 from pycontrails.ext.bada import BADAFlight
 
 bada_3_path = "/path/to/bada3" # TODO
-bada_3_path = "/Users/jsmretschnig/bada/BADA 3.16"
 
 
 def compute_aircraft_performance(flight: Flight, pl: MetDataset) -> Flight:
