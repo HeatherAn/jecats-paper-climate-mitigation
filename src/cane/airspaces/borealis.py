@@ -38,21 +38,3 @@ class Borealis:
     def __init__(self):
         self.feature_collection = self._load_json(_path_to_static / "Borealis_airspaces.json")
         self.feature_dict = {f["properties"]["airspace"]: f for f in self.feature_collection["features"]}
-
-
-def classify_borealis(fps, firs):
-    # first merge, then filter down to only rows where the timestamp is inside the interval
-    fps_with_fir_entries = (
-        pd.merge(fps, firs, on="flight_id", suffixes=(None, "_fir"))
-        .loc[lambda d: (d["time_entry"] <= d["timestamp"]) & (d["timestamp"] < d["time_exit"])]
-    )
-
-    # merge back with the original fps to have all flights and fill with NaN
-    fps = (
-        pd.merge(
-            fps,
-            fps_with_fir_entries[["timestamp"] + list(firs.columns)],
-            on=["flight_id", "timestamp"], how="left"
-        )
-    )
-    return fps
