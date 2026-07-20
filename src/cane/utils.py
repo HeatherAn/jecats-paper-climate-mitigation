@@ -156,3 +156,18 @@ def haul_type_by_distance_ectl(df):
     df["haul_type"] = np.where(df.flown_distance > 4000, "Long", "Medium")
     df["haul_type"] = np.where(df.flown_distance < 1500, "Short", df["haul_type"])
     return df
+
+def flight_haul_type_by_time(
+        df: pd.DataFrame,
+        time_col: str = "flight_time",
+        classification: str = "IATA") -> pd.DataFrame:
+    if classification == "ICAO":
+        # short, long, ultra-long
+        df["haul_type"] = np.where(df[time_col].dt.total_seconds() > 16 * 3600, "Ultra-long", "Long")
+        df["haul_type"] = np.where(df[time_col].dt.total_seconds() < 8 * 3600, "Short", df["haul_type"])
+    elif classification == "IATA":
+        # short, medium, long, ultra-long
+        df["haul_type"] = np.where(df[time_col].dt.total_seconds() > 16 * 3600, "Ultra-long", "Long")
+        df["haul_type"] = np.where(df[time_col].dt.total_seconds() < 6 * 3600, "Medium", df["haul_type"])
+        df["haul_type"] = np.where(df[time_col].dt.total_seconds() < 3 * 3600, "Short", df["haul_type"])
+    return df
