@@ -218,3 +218,46 @@ class ACCF:
             "long_name": "algorithmic climate change function of water vapor",
             "short_name": "aCCF of water vapor"
         })
+
+# ============================================================
+# Contrail aCCFs (Yin et al. 2023, Dietmüller et al. 2023)
+# using the SAC output from CoCiP (Schumann 2012).
+# When multiplied with 0.0151, then the output is in P-ATR20.
+# Better is to use the conversion factors by Dahlmann et al. (2025)
+# ============================================================
+
+def night_contrail_RF(temperature: np.ndarray, sdr: np.ndarray) -> np.ndarray:
+    """
+    Calculate the night contrail RF using the aCCF.
+    :param temperature: Air temperature in [K]
+    :param sdr: Solar direct radiation in [W / m^2]
+    :return: Radiative forcing (RF) in [W / m^2]
+    """
+    RF = 1e-10 * (0.0073 * (10 ** (0.0107 * temperature)) - 1.03)  # Equation 6, Yin et al. 2023
+    RF = np.where(temperature > 201, RF, 0)  # Temperature threshold
+    RF = np.maximum(RF, 0)  # only positive (warming) values allowed
+    RF = np.where(sdr <= 1, RF, 0)  # only nighttime
+    return RF
+
+
+def day_contrail_RF(olr_negative: np.ndarray, sdr: np.ndarray) -> np.ndarray:
+    """
+    Calculate the day contrail RF using the aCCF.
+    :param olr_negative: Outgoing longwave radiation in [W / m^2]. Note: has to be negative!
+    :param sdr: Solar direct radiation in [W / m^2]
+    :return: Radiative forcing (RF) in [W / m^2]
+    """
+    RF = 1e-10 * (-1.7 - 0.0088 * olr_negative)  # Equation 8, Yin et al. 2023
+    RF = np.where(sdr > 1, RF, 0)  # only daytime
+    return RF
+
+
+def contrail_RF(rf_night: np.ndarray, rf_day: np.ndarray, sac: np.ndarray) -> np.ndarray:
+    """
+    Calculate the contrail RF (day + night) using the aCCF.
+    :param rf_night: Night contrail radiative forcing in [W / m^2]
+    :param rf_day: Day contrail radiative forcing in [W / m^2]
+    :param sac: Schmidt-Appleman criteria (SAC) as boolean
+    :return: Radiative forcing (RF) in [W / m^2]
+    """
+    return np.where(sac == 1, rf_night + rf_day, 0)
