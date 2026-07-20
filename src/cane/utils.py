@@ -1,6 +1,33 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+from geopy import distance
+
+from pycontrails import Flight
+
+
+def df_to_flight(df: pd.DataFrame) -> Flight:
+    mass0 = df.aircraft_mass.iloc[0]
+    flight_id = df.flight_id.iloc[0]
+    typecode = df.typecode.iloc[0]
+
+    flight = Flight(
+        time=df.timestamp,
+
+        latitude=df.latitude,
+        longitude=df.longitude,
+        altitude_ft=df.altitude_ft,
+
+        data=df,
+
+        attrs={
+            "flight_id": flight_id,
+            "aircraft_type": typecode,
+            "takeoff_mass": mass0,
+        },
+        drop_duplicated_times=False
+    )
+    return flight
 
 
 def get_time_bounds(df1: pd.DataFrame, df2: pd.DataFrame, timedelta: pd.Timedelta = None, round: str = "h") -> tuple:
@@ -104,3 +131,28 @@ def set_font_size(font_size: int = 14):
         "ytick.labelsize": font_size,
         "legend.fontsize": font_size
     })
+
+def dist(lats: np.ndarray, lons: np.ndarray) -> np.ndarray:
+    """
+        Determine segment distance between waypoints in meters
+        :param lats:
+        :param lons:
+        :return: segment distance in [m]
+    """
+    coords = np.column_stack((lats, lons))
+    distances = [
+        distance.distance(coords[i], coords[i + 1]).meters
+        for i in range(len(coords) - 1)
+    ]
+    distances.append(np.nan)
+    return np.array(distances)
+
+
+def flown_distance(lats: np.ndarray, lons: np.ndarray) -> float:
+    return np.nansum(dist(lats, lons))
+
+
+def haul_type_by_distance_ectl(df):
+    df["haul_type"] = np.where(df.flown_distance > 4000, "Long", "Medium")
+    df["haul_type"] = np.where(df.flown_distance < 1500, "Short", df["haul_type"])
+    return df
