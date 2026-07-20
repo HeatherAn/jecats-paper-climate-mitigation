@@ -76,6 +76,7 @@ def eagwp_from_contrail_ef(ef: float | np.ndarray[float], erf_rf_ratio: float = 
 
 def compute_metrics_for_fleet(
     fleet: Fleet,
+    accf_version: str,
     accf_scaling: dict,
     accf_bounds: tuple,
     efficacy: dict,
@@ -87,7 +88,7 @@ def compute_metrics_for_fleet(
     # (also calculate) Contrail aCCF
     fleet["rf_day"] = day_contrail_RF(fleet["olr_mean"] * -1, fleet["sdr_mean"])
     fleet["rf_night"] = night_contrail_RF(fleet["air_temperature"], fleet["sdr_mean"])
-    fleet["rf_CiC"] = contrail_RF(fleet["rf_night"], fleet["rf_day"], fleet["sac"]) * efficacy["CiC"] / scaling["CiC"]
+    fleet["rf_CiC"] = contrail_RF(fleet["rf_night"], fleet["rf_day"], fleet["sac"]) * efficacy["CiC"] / accf_scaling["CiC"]
     fleet.update({"rf_CiC": fleet["rf_CiC"] * fleet.segment_length() / 1e3})
     mask_by_validity_range(fleet, ["rf_CiC"], bounds=accf_bounds)  # W m^-2 km^-1
     fleet["CiC"] = fleet["rf_CiC"] * m.cf["CiC"]
@@ -101,9 +102,9 @@ def compute_metrics_for_fleet(
     # apply mask
     mask_by_validity_range(fleet, ["aCCF_O3", "aCCF_CH4", "aCCF_H2O"], bounds=accf_bounds)
 
-    fleet["O3"] = fleet["aCCF_O3"] * fleet["nox_ei"] * fleet["fuel_burn"] * efficacy["O3"] / scaling["O3"] * m2.cf["O3"]
-    fleet["CH4"] = fleet["aCCF_CH4"] * fleet["nox_ei"] * fleet["fuel_burn"] * efficacy["CH4"] / scaling["CH4"] * m2.cf["CH4"]
-    fleet["H2O"] = fleet["aCCF_H2O"] * fleet["fuel_burn"] * efficacy["H2O"] / scaling["H2O"] * m2.cf["H2O"]
+    fleet["O3"] = fleet["aCCF_O3"] * fleet["nox_ei"] * fleet["fuel_burn"] * efficacy["O3"] / accf_scaling["O3"] * m2.cf["O3"]
+    fleet["CH4"] = fleet["aCCF_CH4"] * fleet["nox_ei"] * fleet["fuel_burn"] * efficacy["CH4"] / accf_scaling["CH4"] * m2.cf["CH4"]
+    fleet["H2O"] = fleet["aCCF_H2O"] * fleet["fuel_burn"] * efficacy["H2O"] / accf_scaling["H2O"] * m2.cf["H2O"]
     fleet["NOx"] = fleet["O3"] + fleet["CH4"]
     cols = [
         'CO2', 'CO2_with_aCCF', 'CoCiP', 'CiC',
@@ -119,7 +120,7 @@ def compute_metrics_for_fleet(
     fleet["CO2"] = fleet["co2"]  # always CO2e
     fleet["CO2_with_aCCF"] = fleet["aCCF_CO2"] * fleet["fuel_burn"] * m2.cf["CO2"]
 
-    if ver in ["yin_2023", "matthes_2023"]:
+    if accf_version in ["yin_2023", "matthes_2023"]:
         fleet.update({"CiC": fleet["CiC"] / backward_calculation_factors["CiC"]})
         fleet.update({"O3": fleet["O3"] / backward_calculation_factors["O3"]})
         fleet.update({"CH4": fleet["CH4"] / backward_calculation_factors["CH4"]})
