@@ -5,6 +5,7 @@ from pycontrails.core.met import MetDataset
 from pycontrails.models.cocip import Cocip
 from pycontrails.models.accf import ACCF
 from pycontrails.datalib import ecmwf
+from pycontrails import DiskCacheStore
 
 from enum import Enum
 
@@ -56,21 +57,28 @@ friendly_days = [
 ]
 
 
-def era5_all(time_bounds: tuple, pressure_levels: list, product_type: str = "reanalysis") -> tuple[
-    MetDataset, MetDataset]:
+def era5_all(
+    time_bounds: tuple,
+    pressure_levels: list,
+    product_type: str = "reanalysis",
+    cache_dir: str = None
+) -> (MetDataset, MetDataset):
+    cache = DiskCacheStore(cache_dir=cache_dir) if cache_dir else DiskCacheStore()
     # pressure level data
     era5_pl = ERA5(
         time=time_bounds,
         variables=Cocip.met_variables + Cocip.optional_met_variables + (ACCF.met_variables[2], ACCF.met_variables[4]),
         pressure_levels=pressure_levels,
-        product_type=product_type
+        product_type=product_type,
+        cachestore=cache
     )
 
     # single level data (radiation)
     era5_sl = ERA5(
         time=time_bounds,
         variables=Cocip.rad_variables + (ecmwf.SurfaceSolarDownwardRadiation,),
-        product_type=product_type
+        product_type=product_type,
+        cachestore=cache
     )
 
     pl = era5_pl.open_metdataset()
