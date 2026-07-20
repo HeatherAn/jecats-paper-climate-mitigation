@@ -25,9 +25,9 @@ from pycontrails.models.cocip import Cocip
 
 from mpi4py import MPI
 
-from src.cane import era5
-from src.cane.models.cocip import humidity_scaling
-from src.cane.utils import df_to_flight
+from cane import era5
+from cane.models.cocip import humidity_scaling
+from cane.utils import df_to_flight
 
 print("imports successful")
 

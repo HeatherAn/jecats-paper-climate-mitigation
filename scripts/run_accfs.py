@@ -23,9 +23,11 @@ path = f"{os.getenv('HOME')}/gitlab/jecats-paper-climate-mitigation/scripts"
 # %% Import packages
 from pycontrails.core import Fleet
 from pycontrails import MetDataset, MetDataArray
-from src.cane import era5
-from src.cane.utils import get_lat_lon_bounds
-from src.cane.models.accf import ACCF as FastACCF
+
+from cane import era5
+from cane.utils import get_lat_lon_bounds
+from cane.models.accf import ACCF as FastACCF
+
 print("imports successful")
 
 def parse_my_args():
