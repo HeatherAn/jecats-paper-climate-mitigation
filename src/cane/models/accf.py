@@ -218,6 +218,12 @@ class ACCF:
             "long_name": "algorithmic climate change function of water vapor",
             "short_name": "aCCF of water vapor"
         })
+    
+    def accf_co2(
+        self,
+        fuel
+    ):
+        return 7.48e-16 * fuel * ACCF_Params.metric_conv[self.emission_scenario][self.time_horizon]["CO2"]
 
 # ============================================================
 # Contrail aCCFs (Yin et al. 2023, Dietmüller et al. 2023)
