@@ -86,17 +86,9 @@ When using VS Code, make sure to select the venv's Python interpreter: Open the 
 ├── LICENSE
 ├── README.md
 ├── notebooks
-│   ├── create_docs.ipynb
-│   ├── export_for_4TU.ipynb
 │   ├── figure-*.ipynb
-│   ├── jecats-climate-metrics.ipynb
-│   ├── logo.ipynb
 │   ├── methodology.ipynb
 │   ├── pipeline.ipynb
-│   ├── playground-062026.ipynb
-│   ├── playground-072026-cane.ipynb
-│   ├── playground-072026.ipynb
-│   ├── prepare-data.ipynb
 │   ├── rq*.ipynb
 │   └── table-*.ipynb
 ├── pyproject.toml
@@ -126,7 +118,8 @@ When using VS Code, make sure to select the venv's Python interpreter: Open the 
 ```
 
 - `notebooks/figure-*.ipynb`: Each notebook represents one figure of the paper.
-- `notebooks/logo.ipynb`: A notebook to plot the logo of the repository.
+- `notebooks/methodology.ipynb`: A notebook that represents results from the methodology section of the paper.
+- `notebooks/pipeline.ipynb`: A notebook for the processing pipeline, from aircraft performance to climate models on a high-performance-computer (HPC), to climate metric calculations.
 - `notebooks/rq*.ipynb`: Each notebook represents the numerical results for a research question.
 - `notebooks/table*.ipynb`: Each notebook represents a table of the paper.
 - `scripts/*`: Bash scripts to run aCCFs and CoCiP on a High-Performance-Computer (HPC), such as DelftBlue.
