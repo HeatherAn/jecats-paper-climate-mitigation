@@ -1,40 +1,38 @@
-# CANE - Contrail Avoidance Non-CO2 Evaluation
-
-<!--- Add here a badge for the ArXiv identifier of the pre-print version of the paper/journal-article
-    related to this code project (arXiv:YYMM.NNNNN) (if applicable) e.g.:
-
-    [![Paper](http://img.shields.io/badge/Paper-arXiv.YYMM.NNNNN-B3181B?logo=arXiv)](https://arxiv.org/abs/...)
--->
-
-<!--- Add here the hyperlink to the finalized version of the paper/journal-article related to this project
-    (the DOI link provided by the journal publisher after peer-review acceptance) (if applicable) e.g.:
-
-    This repository is the official implementation of the following paper.
-
-    * Paper title: [Paper Title](https://doi.org/YYMM.NNNNN)
--->
+# REPOSITORY TITLE
+CANE - Contrail Avoidance Non-CO2 Evaluation
 
 ## Description
 
-> This is a repository to evaluate the effect of contrail avoidance on the net climate benefit, considering CO2, contrails, NOx, and H2O.
+This is a repository to evaluate the effect of contrail avoidance on the net climate benefit, considering CO2, contrails, NOx, and H2O. 4112 flights traversing the Borealis region (Northern Europe) in 2023 are considered.
 
-> 4,112 flights traversing the Borealis region (Northern Europe) in 2023 are considered.
+The repository accompanies the results of the paper Smetschnig et al. (2026) (see **HOW TO CITE THIS DATASET**).
 
-> Data accompanying the repository is available on [4TU.ResearchData]().
+**Keywords:** Sustainable aviation - Contrail avoidance - Climate optimised trajectories - aCCF - CoCiP - pycontrails
 
-The repository accompanies the paper: _add reference to paper once published_
+**Date of data collection (YYYY-MM-DD):** 2025-01-01 until 2026-06-15
 
-<!--- ## History
+**Funding:** The project has been funded by CONCERTO under the SESAR 3 Joint Undertaking (Grant ID 101114785).
 
-Provide a changelog (if applicable)
--->
+## AUTHORS
 
-## Authors or Maintainers
+- **Jakob Smretschnig** ([@jsmretschnig](https://github.com/jsmretschnig), ![ORCID logo](https://info.orcid.org/wp-content/uploads/2019/11/orcid_16x16.png) [0009-0003-6446-3039](https://orcid.org/0009-0003-6446-3039), j.smretschnig@tudelft.nl, Delft University of Technology, Delft, The Netherlands
 
-Jakob Smretschnig ([@jsmretschnig](https://github.com/jsmretschnig), ![ORCID logo](https://info.orcid.org/wp-content/uploads/2019/11/orcid_16x16.png) [0009-0003-6446-3039](https://orcid.org/0009-0003-6446-3039), j.smretschnig@tudelft.nl, Delft University of Technology, Delft, The Netherlands
+## ACCESS INFORMATION
 
-<!--- ## Table of Contents Provide a table of contents to help readers navigate the README
--->
+### License
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+The contents of this repository are licensed under a **MIT** license (see LICENSE file).
+
+### Repository DOI
+
+Repository DOI: [10.4121/cbdafa47-709d-45da-86e1-7fed28ec3582](https://doi.org/10.4121/cbdafa47-709d-45da-86e1-7fed28ec3582)
+
+
+## VERSIONING AND PROVENANCE
+
+**Last modification date (YYYY-MM-DD):** 2026-07-20
 
 ## Requirements
 
@@ -80,52 +78,51 @@ More details [here](https://py.contrails.org/install.html#bada).
 
 When using VS Code, make sure to select the venv's Python interpreter: Open the command palette (`Cmd+Shift+P` / `Ctrl+Shift+P`) → Python: Select Interpreter → choose the one pointing to `.venv/bin/python`.
 
----
 
-### 🔢 Data
-
-#### ✈️ Trajectory data and simulation output
-
-- Data accompanying the repository is available on 4TU.ResearchData.
-- DOI: [10.4121/16ec2954-a493-41c8-b3f9-f17e9331c46b](https://10.4121/16ec2954-a493-41c8-b3f9-f17e9331c46b)
-
-#### 🌐 Tropopause data
-
-- Download the ERA5 tropopause data from Hoffmann and Spang (2021) for Fig. 6 [here](https://datapub.fz-juelich.de/slcs/tropopause/index.html).
-
-#### 🌤️ Weather data
-
-- Download the ERA5 hourly data on pressure levels / single levels from 1940 to present [here](https://cds.climate.copernicus.eu/datasets) or use the pycontrails interface [here](https://py.contrails.org/notebooks/ECMWF.html).
-
----
-
-## Structure
-
-Directory structure of `cane`:
+## FILE OVERVIEW
 
 ```
 .
-└── notebooks
-│   └── figure-*.ipynb
-│   ├── logo.ipynb
-│   ├── rq*.ipynb
-│   ├── table-*.ipynb
-└── src
-    └── cane
-        └── airspaces
-        │   └── static
-        │   │   └── Borealis_airspaces.json
-        │   ├── borealis.py
-        ├── colors.py
-        ├── constants.py
-        ├── labels.py
-        ├── sankey.py
-        ├── trajectory.py
-        ├── utils.py
-├── .gitignore
 ├── LICENSE
 ├── README.md
+├── notebooks
+│   ├── create_docs.ipynb
+│   ├── export_for_4TU.ipynb
+│   ├── figure-*.ipynb
+│   ├── jecats-climate-metrics.ipynb
+│   ├── logo.ipynb
+│   ├── methodology.ipynb
+│   ├── pipeline.ipynb
+│   ├── playground-062026.ipynb
+│   ├── playground-072026-cane.ipynb
+│   ├── playground-072026.ipynb
+│   ├── prepare-data.ipynb
+│   ├── rq*.ipynb
+│   └── table-*.ipynb
 ├── pyproject.toml
+├── scripts
+│   ├── run_accfs.py
+│   └── run_cocip.py
+└── src
+    ├── cane
+    │   ├── airspaces
+    │   │   ├── borealis.py
+    │   │   └── static
+    │   │       └── Borealis_airspaces.json
+    │   ├── colors.py
+    │   ├── constants.py
+    │   ├── era5.py
+    │   ├── labels.py
+    │   ├── metrics
+    │   │   ├── __init__.py
+    │   │   ├── metrics.py
+    │   │   └── static
+    │   │       └── dahlmann-2025.csv
+    │   ├── models
+    │   │   ├── accf.py
+    │   │   ├── aircraft_performance.py
+    │   │   └── cocip.py
+    │   └── utils.py
 ```
 
 - `notebooks/figure-*.ipynb`: Each notebook represents one figure of the paper.
@@ -134,79 +131,71 @@ Directory structure of `cane`:
 - `notebooks/table*.ipynb`: Each notebook represents a table of the paper.
 - `src/cane/airspaces/*`: To visualize the boundaries of the Borealis airspaces.
 - `src/cane/*`: Helpers for coloring, constants, friendly names, haul-type classification etc.
-- `src/cane/sankey.py`: This is a [pySankey](https://github.com/anazalea/pySankey/tree/master) fork with some bug-fixes.
 
-## License
+Don't forget to fork [pySankey](https://github.com/anazalea/pySankey/tree/master) and remove the `check_data_matches_labels` part for the labels on the right side of the diagram in the code.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+## HOW TO CITE THIS REPOSITORY
 
-The contents of this repository are licensed under a **MIT** license (see LICENSE file).
+When using this repository please cite the **repository** and the **related article**:
 
-## Citation
+_add reference to paper once published_  
 
-If you want to cite this repository in your research paper, please use the following information:
+Smretschnig, Jakob (2026): Repository to evaluate the effect of contrail avoidance on the net climate benefit (CO2, contrails, NOx, H2O) in Northern Europe. Version 1. 4TU.ResearchData. repository. https://doi.org/10.4121/cbdafa47-709d-45da-86e1-7fed28ec3582  
 
-Smretschnig, Jakob. "Contrail Avoidance Non-CO2 Evaluation (CANE) Code Repository." DOI: [10.4121/cbdafa47-709d-45da-86e1-7fed28ec3582](https://doi.org/10.4121/cbdafa47-709d-45da-86e1-7fed28ec3582). (2026).
 
-## Would you like to contribute?
+## REFERENCES
 
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+### DATASETS
 
-## Acknowledgements
+[1] Copernicus Climate Change Service, Climate Data Store, (2023): **ERA5 hourly data on pressure levels from 1940 to present**. Copernicus Climate Change Service (C3S) Climate Data Store (CDS). DOI: [10.24381/cds.bd0915c6](https://doi.org/10.24381/cds.bd0915c6)   
 
-Special thanks to [Thymen](https://github.com/ThymenW) for the inspiration on the repository structure and to [Heather](https://github.com/HeatherAn) for recommended documentation practices.
+[2] Copernicus Climate Change Service, Climate Data Store, (2023): **ERA5 hourly data on single levels from 1940 to present**. Copernicus Climate Change Service (C3S) Climate Data Store (CDS). DOI: [10.24381/cds.adbb2d47](https://doi.org/10.24381/cds.bd0915c6)   
 
-## References
+[3] ECMWF HRES forecast data. © 2026 European Centre for Medium-Range Weather Forecasts (ECMWF): https://www.ecmwf.int/en/forecasts/datasets/set-i    
+
+[4] Hoffmann, L. and R. Spang, Reanalysis Tropopause Data Repository, DOI: [10.26165/JUELICH-DATA/UBNGI2](https://doi.org/10.26165/JUELICH-DATA/UBNGI2), Jülich DATA, V1, 2021.
+
+
+### OTHER
 
 **algorithmic Climate Change Function (aCCF)**
 
-Van Manen, J., and V. Grewe. “Algorithmic Climate Change Functions for the Use in Eco-Efficient Flight Planning.” Transportation Research Part D: Transport and Environment 67 (February 2019): 388–405. https://doi.org/10.1016/j.trd.2018.12.016.
+[5] Van Manen, J., and V. Grewe. “Algorithmic Climate Change Functions for the Use in Eco-Efficient Flight Planning.” Transportation Research Part D: Transport and Environment 67 (February 2019): 388–405. https://doi.org/10.1016/j.trd.2018.12.016  
 
-Yin, Feijia, Volker Grewe, Federica Castino, et al. “Predicting the Climate Impact of Aviation for En-Route Emissions: The Algorithmic Climate Change Function Submodel ACCF 1.0 of EMAC 2.53.” Geoscientific Model Development 16, no. 11 (2023): 3313–34. https://doi.org/10.5194/gmd-16-3313-2023.
+[6] Yin, Feijia, Volker Grewe, Federica Castino, et al. “Predicting the Climate Impact of Aviation for En-Route Emissions: The Algorithmic Climate Change Function Submodel ACCF 1.0 of EMAC 2.53.” Geoscientific Model Development 16, no. 11 (2023): 3313–34. https://doi.org/10.5194/gmd-16-3313-2023  
 
-Dietmüller, Simone, Sigrun Matthes, Katrin Dahlmann, et al. “A Python Library for Computing Individual and Merged Non-CO 2 Algorithmic Climate Change Functions: CLIMaCCF V1.0.” Geoscientific Model Development 16, no. 15 (2023): 4405–25. https://doi.org/10.5194/gmd-16-4405-2023.
+[7] Dietmüller, Simone, Sigrun Matthes, Katrin Dahlmann, et al. “A Python Library for Computing Individual and Merged Non-CO 2 Algorithmic Climate Change Functions: CLIMaCCF V1.0.” Geoscientific Model Development 16, no. 15 (2023): 4405–25. https://doi.org/10.5194/gmd-16-4405-2023  
 
-Matthes, Sigrun, Simone Dietmüller, Katrin Dahlmann, et al. “Updated Algorithmic Climate Change Functions (aCCF) V1.0A: Evaluation with the Climate-Response Model AirClim V2.0.” Preprint, Atmospheric sciences, 2023. https://doi.org/10.5194/gmd-2023-92.
+[8] Matthes, Sigrun, Simone Dietmüller, Katrin Dahlmann, et al. “Updated Algorithmic Climate Change Functions (aCCF) V1.0A: Evaluation with the Climate-Response Model AirClim V2.0.” Preprint, Atmospheric sciences, 2023. https://doi.org/10.5194/gmd-2023-92  
+
 
 **BADA3**
 
-EUROCONTROL. User Manual for the Base of Aircraft Data (BADA) Revision 3.16. EIH Technical/Scientific Report No. 22/05/12-45. EUROCONTROL Experimental Centre (EEC), 2022.
+[9] EUROCONTROL. User Manual for the Base of Aircraft Data (BADA) Revision 3.16. EIH Technical/Scientific Report No. 22/05/12-45. EUROCONTROL Experimental Centre (EEC), 2022.  
+
 
 **CoCiP**
 
-U. Schumann. “A Contrail Cirrus Prediction Model.” Geoscientific Model Development 5, no. 3 (2012): 543–80. https://doi.org/10.5194/gmd-5-543-2012.
+[10] U. Schumann. “A Contrail Cirrus Prediction Model.” Geoscientific Model Development 5, no. 3 (2012): 543–80. https://doi.org/10.5194/gmd-5-543-2012.
+
 
 **Conversion factors**
 
-Dahlmann, Katrin, Sigrun Matthes, and Volker Grewe. “Conversion of Climate Metrics for Policy Applications.” Preprint, Zenodo, July 31, 2025. https://doi.org/10.5281/ZENODO.16355781.
+[11] Dahlmann, Katrin, Sigrun Matthes, and Volker Grewe. “Conversion of Climate Metrics for Policy Applications.” Preprint, Zenodo, July 31, 2025. https://doi.org/10.5281/ZENODO.16355781.
 
-**DelftBlue**
-
-DHCP: DelftBlue Supercomputer (Phase 2), https://www.tudelft.nl/dhpc/ark:/44463/DelftBluePhase2, delft High Performance Computing
-Centre (DHPC), 2024.
-
-**ERA5**
-
-Copernicus Climate Change Service, Climate Data Store, (2023): **ERA5 hourly data on pressure levels from 1940 to present**. Copernicus Climate Change Service (C3S) Climate Data Store (CDS). DOI: [10.24381/cds.bd0915c6](https://doi.org/10.24381/cds.bd0915c6) (Accessed on 15-06-2026)
-
-Copernicus Climate Change Service, Climate Data Store, (2023): **ERA5 hourly data on single levels from 1940 to present**. Copernicus Climate Change Service (C3S) Climate Data Store (CDS). DOI: [10.24381/cds.adbb2d47](https://doi.org/10.24381/cds.bd0915c6) (Accessed on 15-06-2026)
-
-ECMWF HRES forecast data. © 2026 European Centre for Medium-Range Weather Forecasts (ECMWF): https://www.ecmwf.int/en/forecasts/datasets/set-i (Accessed on 15-06-2026)
 
 **FFM2**
 
-DuBois, Doug, and Gerald C. Paynter. “‘Fuel Flow Method2’ for Estimating Aircraft Emissions.” SAE Transactions 115 (2006): 1–14.
+[12] DuBois, D. and Paynter*, G., "“Fuel Flow Method2” for Estimating Aircraft Emissions," Non-Conference Specific Technical Papers - 2006, , https://doi.org/10.4271/2006-01-1987. 
 
-**pycontrails**
 
-Shapiro, Marc, Zeb Engberg, Roger Teoh, Marc Stettler, Tom Dean, and Tristan Abbott. Pycontrails: Python Library for Modeling Aviation Climate Impacts. V. v0.54.11. Zenodo, released July 2025. https://doi.org/10.5281/zenodo.16575452.
+**pyContrails**
 
-**Tropopause data**
+[13] Shapiro, Marc, Zeb Engberg, Roger Teoh, Marc Stettler, Tom Dean, and Tristan Abbott. Pycontrails: Python Library for Modeling Aviation Climate Impacts. V. v0.54.11. Zenodo, released July 2025. https://doi.org/10.5281/zenodo.16575452.
 
-Hoffmann, L. and R. Spang, Reanalysis Tropopause Data Repository, DOI: [10.26165/JUELICH-DATA/UBNGI2](https://doi.org/10.26165/JUELICH-DATA/UBNGI2), Jülich DATA, V1, 2021.
 
 **T4T2**
 
-Teoh, Roger, Ulrich Schumann, Edward Gryspeerdt, et al. “Aviation Contrail Climate Effects in the North Atlantic from 2016–2021.” Atmospheric Chemistry and Physics 22, no. 16 (2022): 10919--10935. https://doi.org/10.5194/acp-22-10919-2022.
+[14] Teoh, Roger, Ulrich Schumann, Edward Gryspeerdt, et al. “Aviation Contrail Climate Effects in the North Atlantic from 2016–2021.” Atmospheric Chemistry and Physics 22, no. 16 (2022): 10919--10935. https://doi.org/10.5194/acp-22-10919-2022.
 
-Teoh, Roger, Zebediah Engberg, Marc Shapiro, Lynnette Dray, and Marc E. J. Stettler. “The High-Resolution Global Aviation Emissions Inventory Based on ADS-B (GAIA) for 2019–2021.” Atmospheric Chemistry and Physics 24, no. 1 (2024): 725–44. https://doi.org/10.5194/acp-24-725-2024.
+[15] Teoh, Roger, Zebediah Engberg, Marc Shapiro, Lynnette Dray, and Marc E. J. Stettler. “The High-Resolution Global Aviation Emissions Inventory Based on ADS-B (GAIA) for 2019–2021.” Atmospheric Chemistry and Physics 24, no. 1 (2024): 725–44. https://doi.org/10.5194/acp-24-725-2024.
