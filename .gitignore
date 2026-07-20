@@ -1,6 +1,7 @@
 .idea/
 
 .venv
+.vscode
 
 /src/cane.egg-info
 /data
@@ -10,3 +11,5 @@
 
 data/
 reports/
+
+docs/
