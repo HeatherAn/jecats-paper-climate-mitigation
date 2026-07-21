@@ -5,6 +5,8 @@ from geopy import distance
 
 from pycontrails import Flight
 
+from cane.models.aircraft_performance import get_wing_span
+
 
 def df_to_flight(df: pd.DataFrame) -> Flight:
     mass0 = df.aircraft_mass.iloc[0]
@@ -24,6 +26,7 @@ def df_to_flight(df: pd.DataFrame) -> Flight:
             "flight_id": flight_id,
             "aircraft_type": typecode,
             "takeoff_mass": mass0,
+            "wingspan": get_wing_span(typecode)
         },
         drop_duplicated_times=False
     )

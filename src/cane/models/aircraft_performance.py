@@ -17,3 +17,16 @@ def compute_aircraft_performance(flight: Flight, pl: MetDataset) -> Flight:
 
     flight.update({"fuel_burn": fuel_burn(flight["fuel_flow"], flight.segment_duration())})
     return flight
+
+
+def get_wing_span(typecode: str) -> str:
+    try:
+        wingspan = (
+            BADAFlight(bada3_path=bada_3_path)
+            .get_bada(typecode)
+            .get_aircraft_params(typecode)
+            .wing_span
+        )
+    except:
+        raise ValueError(f"Wing span for {typecode} not found.")
+    return wingspan
