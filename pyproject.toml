@@ -18,7 +18,7 @@ dependencies = [
     "matplotlib>=3.10.8",
     "notebook>=7.5.5",
     "pip>=26.0.1",
-    "pycontrails[complete]>=0.60.4",
+    "pycontrails[complete]>=0.54.11",
     "seaborn>=0.13.2"
 ]
 

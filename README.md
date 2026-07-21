@@ -71,7 +71,7 @@ Then install pycontrails-bada (because the last command doesn't work with `uv` p
 gcloud auth login
 pip install keyring keyrings.google-artifactregistry-auth
 pip install --index-url https://us-central1-python.pkg.dev/contrails-301217/pycontrails/simple \
-    "pycontrails-bada==0.8.2"
+    "pycontrails-bada==0.7.7"
 ```
 
 More details [here](https://py.contrails.org/install.html#bada).
