@@ -8,7 +8,7 @@ from pycontrails import Flight
 from cane.models.aircraft_performance import get_wing_span
 
 
-def df_to_flight(df: pd.DataFrame, bada_3_path: str) -> Flight:
+def df_to_flight(df: pd.DataFrame, bada_3_path: str, cols_to_drop: list = []) -> Flight:
     mass0 = df.aircraft_mass.iloc[0]
     flight_id = df.flight_id.iloc[0]
     typecode = df.typecode.iloc[0]
@@ -20,7 +20,7 @@ def df_to_flight(df: pd.DataFrame, bada_3_path: str) -> Flight:
         longitude=df.longitude,
         altitude_ft=df.altitude_ft,
 
-        data=df,
+        data=df.drop(columns=cols_to_drop),
 
         attrs={
             "flight_id": flight_id,
