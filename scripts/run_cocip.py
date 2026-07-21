@@ -62,7 +62,6 @@ def compute_cocip(flight: Flight, pl: MetDataset, sl: MetDataset, **kwargs) -> F
         }
     )
     cocip_out = cocip.eval(flight)
-    cocip_out.attrs["flight_id"] = fid
 
     # save results
     # make sure all meta data are serializable (np.int is not allowed, but int is; for whatever reason np.float works fine)
