@@ -58,7 +58,6 @@ def compute_cocip(flight: Flight, pl: MetDataset, sl: MetDataset, **kwargs) -> F
             "dt_integration": np.timedelta64(10, "m"),
             "max_age": np.timedelta64(12, "h"),
             "humidity_scaling": humidity_scaling,
-            "compute_atr20": True
         }
     )
     cocip_out = cocip.eval(flight)
