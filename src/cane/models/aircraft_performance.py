@@ -19,7 +19,8 @@ def compute_aircraft_performance(flight: Flight, pl: MetDataset) -> Flight:
     return flight
 
 
-def get_wing_span(typecode: str) -> str:
+# also used on DelftBlue
+def get_wing_span(typecode: str, bada_3_path: str) -> str:
     try:
         wingspan = (
             BADAFlight(bada3_path=bada_3_path)

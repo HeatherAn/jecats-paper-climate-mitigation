@@ -6,7 +6,6 @@ import numpy as np
 import pandas as pd
 import xarray as xr
 import os
-import sys
 import glob
 import argparse
 import datetime
@@ -15,9 +14,8 @@ import datetime
 HOME = os.getenv("HOME")
 REPOSITORY = f"{HOME}/gitlab/jecats-paper-climate-mitigation"
 SCRATCH = f"{HOME}/scratch"
-
-sys.path.insert(0, f"{os.getenv('HOME')}/gitlab/jecats-paper-climate-mitigation/")
-path = f"{os.getenv('HOME')}/gitlab/jecats-paper-climate-mitigation/scripts"
+DATA = f"{SCRATCH}/traffic/data/processed"
+BADA_3_PATH = f"{HOME}/BADA3.16"
 
 # %% Import packages
 from pycontrails import Flight, MetDataset
@@ -43,10 +41,10 @@ def compute_cocip(flight: Flight, pl: MetDataset, sl: MetDataset, **kwargs) -> F
     fid = flight.dataframe.flight_id.values[0]
 
     # skip if already computed
-    if f"{version}_trajectories_day{day}_with_accfs_and_cocip_{fid}.parquet" in os.listdir(f"{SCRATCH}/day{day}"):
+    if f"{version}_trajectories_day{day}_with_accfs_and_cocip_{fid}.parquet" in os.listdir(f"{DATA}/day{day}"):
         print(f"Rank {rank} found flight number: {fid} - skipping")
         return Flight(
-            pd.read_parquet(f"{SCRATCH}/day{day}/{version}_trajectories_day{day}_with_accfs_and_cocip_{fid}.parquet")
+            pd.read_parquet(f"{DATA}/day{day}/{version}_trajectories_day{day}_with_accfs_and_cocip_{fid}.parquet")
             .rename(columns={
                 "eastward_wind": "u_wind",
                 "northward_wind": "v_wind",
@@ -73,7 +71,7 @@ def compute_cocip(flight: Flight, pl: MetDataset, sl: MetDataset, **kwargs) -> F
         for k, v in cocip_out.attrs.items()
     }
     cocip_out.dataframe.to_parquet(
-        f"{SCRATCH}/day{day}/{version}_trajectories_day{day}_with_accfs_and_cocip_{fid}.parquet")  # includes the .attrs :))
+        f"{DATA}/day{day}/{version}_trajectories_day{day}_with_accfs_and_cocip_{fid}.parquet")  # includes the .attrs :))
 
     end_datetime = datetime.datetime.now()
     print(f"Rank {rank}: cocip computed for flight_id: ", fid, "in: ", end_datetime - start_datetime)
@@ -102,7 +100,7 @@ def main():
     if rank == 0:
         # %% Read traffic data
         df = (
-            pd.read_parquet(f"{SCRATCH}/{version}_trajectories_day{day}_with_accfs.parquet")
+            pd.read_parquet(f"{DATA}/{version}_trajectories_day{day}_with_accfs.parquet")
             .rename(columns={
                 "eastward_wind": "u_wind",
                 "northward_wind": "v_wind",
@@ -110,10 +108,14 @@ def main():
         )
         print("fleet loaded, day: ", day, "version: ", version)
 
+        # Create output dirs
+        path_to_output = os.path.expanduser(f"{DATA}/day{day}")
+        os.makedirs(path_to_output, exist_ok=True)
+
         # Convert to fleet
         fleet = {
-            fid: df_to_flight(group)
-            for fid, group in dff.groupby("flight_id")
+            fid: df_to_flight(group, bada_3_path=BADA_3_PATH) # BADA3 is required for adding the wingspan
+            for fid, group in df.groupby("flight_id")
         }
         flights = list(fleet.values())
 

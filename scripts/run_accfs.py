@@ -6,7 +6,6 @@ import numpy as np
 import pandas as pd
 import xarray as xr
 import os
-import sys
 import glob
 import datetime
 import argparse
@@ -14,11 +13,8 @@ import argparse
 # %% Fix paths
 HOME = os.getenv("HOME")
 REPOSITORY = f"{HOME}/gitlab/jecats-paper-climate-mitigation"
-DATA = f"{HOME}/path_to_data"
 SCRATCH = f"{HOME}/scratch"
-
-sys.path.insert(0, f"{os.getenv('HOME')}/gitlab/jecats-paper-climate-mitigation/")
-path = f"{os.getenv('HOME')}/gitlab/jecats-paper-climate-mitigation/scripts"
+DATA = f"{SCRATCH}/traffic/data/processed"
 
 # %% Import packages
 from pycontrails.core import Fleet
@@ -44,7 +40,7 @@ def main():
     day, version = parse_my_args()
 
     # %% Read traffic data
-    df = pd.read_parquet(f"{DATA}/data/processed/{version}_trajectories_day{day}.parquet")
+    df = pd.read_parquet(f"{DATA}/{version}_trajectories_day{day}.parquet")
     fleet = Fleet(
         time=df.timestamp,
         data=df
@@ -115,7 +111,7 @@ def main():
     print(np.nansum(fleet["air_temperature"]))
 
     # %% Save the results
-    saving_path = f"{SCRATCH}/{version}_trajectories_day{day}_with_accfs.parquet"
+    saving_path = f"{DATA}/{version}_trajectories_day{day}_with_accfs.parquet"
     fleet.dataframe.to_parquet(saving_path)
     print(f"dataframe saved to {saving_path}")
 
