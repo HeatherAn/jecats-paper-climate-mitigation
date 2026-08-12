@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below"
+authors:
+  - family-names: Smretschnig
+    given-names: Jakob
+    orcid: https://orcid.org/0009-0003-6446-3039
+date-released: 2026-08-06
+title: "Contrail Avoidance Non-CO2 Evaluation (CANE)"
+version: 1.0.0
+identifiers:
+  - type: doi
+    value: "10.4121/cbdafa47-709d-45da-86e1-7fed28ec3582"
+  - type: doi
+    value: "10.4121/"
+  - type: doi
+    value: "10.5194/jecats-2026-13"
