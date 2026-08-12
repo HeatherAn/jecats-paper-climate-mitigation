@@ -133,15 +133,15 @@ The `./src` folder contains the functions used by the pipeline. More specificall
 
 When using this repository please cite this **code repository**, the related **data repository** and the **related article**. You can do so either using the `./CITATION.CFF` file or by using the following information:
 
-**code repository** 
+**Code repository** 
 
 J. Smretschnig, 2026, Contrail Avoidance Non-CO2 Evaluation (CANE). 4TU.ResearchData. Software. [https://doi.org/10.4121/cbdafa47-709d-45da-86e1-7fed28ec3582](https://doi.org/10.4121/cbdafa47-709d-45da-86e1-7fed28ec3582) 
 
-**data repository**
+**Data repository**
 
 Smretschnig, Jakob; Clément, Joël; Núñez Arribas, Sergio (2026): Filed and contrail-optimised flight trajectories in Northern Europe. Version 1. 4TU.ResearchData. Dataset. [https://doi.org/10.4121/16ec2954-a493-41c8-b3f9-f17e9331c46b](https://doi.org/10.4121/16ec2954-a493-41c8-b3f9-f17e9331c46b)
 
-**article**
+**Article**
 
 Smretschnig, J., Yin, F., Piontek, D., Clément, J., Núñez Arribas, S., Dahlmann, K., Castino, F., and Grewe, V.: Can we achieve significant climate mitigation by optimising only for contrails?, J. Env. Com. Air Transp. Sys. Discuss. [preprint], [https://doi.org/10.5194/jecats-2026-13](https://doi.org/10.5194/jecats-2026-13), in review, 2026.
 
