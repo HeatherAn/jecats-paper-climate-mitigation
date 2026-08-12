@@ -1,38 +1,33 @@
-# REPOSITORY TITLE
-CANE - Contrail Avoidance Non-CO2 Evaluation
+# Contrail Avoidance Non-CO2 Evaluation (CANE)
 
-## Description
+This repository provides a **Python pipeline** for quantifying the **net climate benefit of contrail avoidance** accounting for the climate effects of CO$_{2}$, contrails, NO$_{x}$ and H$_{2}$O. 
 
-This is a repository to evaluate the effect of contrail avoidance on the net climate benefit, considering CO2, contrails, NOx, and H2O. 4112 flights traversing the Borealis region (Northern Europe) in 2023 are considered.
+The pipeline is demonstrated through a real-world case study, analyzing 4112 flights traversing the Borealis region (Northern Europe) in 2023 published in Smretschnig et al. (2026) (see **How to cite this repository**). This repository contains Jupyter notebooks that reproduce the figures presented in Smretschnig et al. (2026). The data related to this case study has also been released publicly via the 4TU.ResearchData archive (see **How to cite this repository**).
 
-The repository accompanies the results of the paper Smetschnig et al. (2026) (see **HOW TO CITE THIS REPOSITORY**).
+**Keywords:** Sustainable aviation - Contrails - Contrail avoidance - Climate optimised trajectories - aCCF - CoCiP - pycontrails - Aerospace engineering 
 
-**Keywords:** Sustainable aviation - Contrail avoidance - Climate optimised trajectories - aCCF - CoCiP - pycontrails
+**Funding:** The project has been funded by CONCERTO under the SESAR 3 Joint Undertaking (Grant ID [101114785](https://www.sesarju.eu/projects/CONCERTO)).
 
-**Date of data collection (YYYY-MM-DD):** 2025-01-01 until 2026-06-15
 
-**Funding:** The project has been funded by CONCERTO under the SESAR 3 Joint Undertaking (Grant ID 101114785).
+## Author(s)
 
-## AUTHORS
+- **Jakob Smretschnig** ([@jsmretschnig](https://github.com/jsmretschnig), ![ORCID logo](https://info.orcid.org/wp-content/uploads/2019/11/orcid_16x16.png) [0009-0003-6446-3039](https://orcid.org/0009-0003-6446-3039), j.smretschnig@tudelft.nl, Technische Universiteit Delft, The Netherlands
 
-- **Jakob Smretschnig** ([@jsmretschnig](https://github.com/jsmretschnig), ![ORCID logo](https://info.orcid.org/wp-content/uploads/2019/11/orcid_16x16.png) [0009-0003-6446-3039](https://orcid.org/0009-0003-6446-3039), j.smretschnig@tudelft.nl, Delft University of Technology, Delft, The Netherlands
 
-## ACCESS INFORMATION
-
-### License
+## License
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-The contents of this repository are licensed under a **MIT** license (see LICENSE file).
+The contents of this repository are licensed under a **MIT** license (see `./LICENSE.txt` file).
 
-### Repository DOI
+Copyright notice:
 
-Repository DOI: [10.4121/cbdafa47-709d-45da-86e1-7fed28ec3582](https://doi.org/10.4121/cbdafa47-709d-45da-86e1-7fed28ec3582)
+Technische Universiteit Delft hereby disclaims all copyright interest in the program "Contrail Avoidance Non-CO2 Evaluation CANE" written by the Author(s). 
+Henri Werij, Faculty of Aerospace Engineering, Technische Universiteit Delft.
+
+© 2026, J. Smretschnig
 
 
-## VERSIONING AND PROVENANCE
-
-**Last modification date (YYYY-MM-DD):** 2026-07-20
 
 ## Requirements
 
@@ -49,7 +44,7 @@ Create a virtual environment and activate it:
 
 ```bash
 uv venv --python 3.11
-source .venv/bin/activate
+source .venv/bin/activate   # or .venv/Scripts/activate on Windows
 ```
 
 Install in editable mode:
@@ -58,94 +53,102 @@ Install in editable mode:
 uv pip install -e .
 ```
 
-Check if `pip` and `uv` point to the same `.venv` directory:
+Activate the environment again and check if `pip` and `uv` point to the same `.venv` directory:
 
 ```bash
-source .venv/bin/activate # needs to be run again after pip install
-which pip  # should point to .venv/bin/pip
+source .venv/bin/activate # .venv/Scripts/activate on Windows
+which pip  # should point to .venv/bin/pip (Unix) or .venv/Scripts/pip (Windows)
 ```
 
-Then install pycontrails-bada (because the last command doesn't work with `uv` prefix):
+Install pycontrails-bada 0.7.7 with `pip`. Be aware this is a private extension for which access must be requested at info@contrails.org. Once access is provided, follow the instructions specified in its [documentation](https://py.contrails.org/install.html#bada). 
 
-```bash
-gcloud auth login
-pip install keyring keyrings.google-artifactregistry-auth
-pip install --index-url https://us-central1-python.pkg.dev/contrails-301217/pycontrails/simple \
-    "pycontrails-bada==0.7.7"
-```
+Once the installation is complete, run the `./notebooks/figure-*.ipynb`notebooks in numerical order to reproduce the figures presented in the related article. In order to run the notebooks:
+* download the related data from the [4TU.ResearchData](add_DOI_data_publication) archive (see **How to cite this repository**) and store it in a `data` directory located at the root (top-level) directory of this repository.
+* Download ERA5 tropopause data from FZ Jülich ([https://doi.org/10.26165/JUELICH-DATA/UBNGI2](https://doi.org/10.26165/JUELICH-DATA/UBNGI2) [3]) and store in a `./data/juelich` directory. **Keep in mind:** this dataset is large in size (~1.4 GB per file). The notebook `./notebooks/Figure-06.ipynb` uses only part of the dataset to reproduce the figure 6 of the related paper.  
+* Modify the paths at the beginning of the notebooks accordingly if not using the default data locations suggested above (the default file paths are configured to look for data inside a folder named `data` located at the root (top-level) directory of the repository).  
+* Create a `./figures` folder which is where the plots generated by the notebooks will be saved as png files.    
+* The notebook `./notebooks/figure-09.ipynb` requires the `sankey.py` module, which is not included in this repository. To obtain it:
+    - clone or download the [pySankey](https://github.com/anazalea/pySankey) repository.  
+    - Copy the `pySankey/pysankey/sankey.py` module (version commit 811a638) to your `./src/cane/` directory.   
+    - Apply the following modifications: comment out lines 123--126 (i.e. do not run the check_data_matches_labels() function for right labels) 
 
-More details [here](https://py.contrails.org/install.html#bada).
+To apply the pipeline to a different dataset, run `./notebooks/pipeline.ipynb`.
 
-When using VS Code, make sure to select the venv's Python interpreter: Open the command palette (`Cmd+Shift+P` / `Ctrl+Shift+P`) → Python: Select Interpreter → choose the one pointing to `.venv/bin/python`.
+**Reminder**: When using VS Code, make sure to select the venv's Python interpreter: Open the command palette (`Cmd+Shift+P` / `Ctrl+Shift+P`) → `Python: Select Interpreter` → choose the one pointing to `.venv/bin/python` (Unix) or `.venv/Scripts/python` (Windows).
 
 
-## FILE OVERVIEW
+## File Overview
 
 ```
 .
-├── LICENSE
+├── CITATION.cff
+├── LICENSE.txt
 ├── README.md
 ├── notebooks
-│   ├── figure-*.ipynb
-│   ├── methodology.ipynb
-│   ├── pipeline.ipynb
-│   ├── pipeline-test.ipynb
-│   ├── rq*.ipynb
-│   └── table-*.ipynb
+│   ├── figure-*.ipynb  
+│   └── pipeline.ipynb
 ├── pyproject.toml
 ├── scripts
 │   ├── run_accfs.py
 │   └── run_cocip.py
 └── src
-    ├── cane
-    │   ├── airspaces
-    │   │   ├── borealis.py
-    │   │   └── static
-    │   │       └── Borealis_airspaces.json
-    │   ├── colors.py
-    │   ├── constants.py
-    │   ├── labels.py
-    │   ├── metrics
-    │   │   ├── __init__.py
-    │   │   ├── metrics.py
-    │   │   └── static
-    │   │       └── dahlmann-2025.csv
-    │   ├── models
-    │   │   ├── accf.py
-    │   │   ├── aircraft_performance.py
-    │   │   ├── cocip.py
-    │   │   └── era5.py
-    │   └── utils.py
+    └── cane
+        ├── airspaces
+        │   ├── borealis.py
+        │   └── static
+        │       └── Borealis_airspaces.json
+        ├── colors.py
+        ├── constants.py
+        ├── labels.py
+        ├── metrics
+        │   ├── __init__.py
+        │   ├── metrics.py
+        │   └── static
+        │       └── dahlmann-2025.csv
+        ├── models
+        │   ├── accf.py
+        │   ├── aircraft_performance.py
+        │   ├── cocip.py
+        │   └── era5.py
+        └── utils.py
 ```
 
-- `notebooks/figure-*.ipynb`: Each notebook represents one figure of the paper.
-- `notebooks/methodology.ipynb`: A notebook that represents results from the methodology section of the paper.
-- `notebooks/pipeline*.ipynb`: Notebooks for the processing pipeline, from aircraft performance to climate models on a high-performance-computer (HPC), to climate metric calculations.
-- `notebooks/rq*.ipynb`: Each notebook represents the numerical results for a research question.
-- `notebooks/table*.ipynb`: Each notebook represents a table of the paper.
-- `scripts/*`: Bash scripts to run aCCFs and CoCiP on a High-Performance-Computer (HPC), such as DelftBlue.
-- `src/cane/airspaces/*`: To visualize the boundaries of the Borealis airspaces.
-- `src/cane/metrics/*`: Compute the climate effect in different climate metrics.
-- `src/cane/models/accf.py`: Compute the aCCFs for CO2, NOx, and H2O.
-- `src/cane/models/aircraft_performance.py`: Compute the fuel consumption with BADA3.
-- `src/cane/models/cocip.py`: Contains a helper for the CoCiP configuration.
-- `src/cane/models/era5.py`: Download meteorological data from ERA5.
-- `src/cane/*`: Helpers for coloring, constants, friendly names, haul-type classification etc.
+The `./notebooks` folder contains the Jupyter notebooks that reproduce the figures of Smretschnig et a. (2026). More specifically:
+- `figure-*.ipynb`: each notebook reproduces one figure of the related article.
+- `pipeline.ipynb`: notebook with the processing pipeline, from aircraft performance to climate models on a high-performance-computer (HPC).  
 
-For Fig. 09, don't forget to fork [pySankey](https://github.com/anazalea/pySankey/tree/master) and remove the `check_data_matches_labels` part for the labels on the right side of the diagram in the code.
+The `./scripts` folder contains Bash scripts to run aCCFs and CoCiP on a High-Performance-Computer (HPC), such as [DelftBlue](https://www.tudelft.nl/dhpc/system).
 
-## HOW TO CITE THIS REPOSITORY
-
-When using this repository please cite the **repository** and the **related article**:
-
-_add reference to paper once published_  
-
-Smretschnig, Jakob (2026): Repository to evaluate the effect of contrail avoidance on the net climate benefit (CO2, contrails, NOx, H2O) in Northern Europe. Version 1. 4TU.ResearchData. repository. https://doi.org/10.4121/cbdafa47-709d-45da-86e1-7fed28ec3582  
+The `./src` folder contains the functions used by the pipeline. More specifically:
+- `./cane/airspaces/*`: functions to visualize the boundaries of the Borealis airspaces.
+- `./cane/metrics/*`: computation of the climate effect using different climate metrics.
+- `./cane/models/accf.py`: computation of algorithmic Climate Change Functions (aCCFs) for CO2, NOx, and H2O.
+- `./cane/models/aircraft_performance.py`: computation of fuel consumption with BADA3.
+- `./cane/models/cocip.py`: helper functionalities for the CoCiP configuration.
+- `./cane/models/era5.py`: functionality to download meteorological data from ERA5.
+- `./cane/utils.py`: helper functionalities regarding coloring, constants, friendly names, haul-type classification, etc.
 
 
-## REFERENCES
+## How to cite this repository
 
-### DATASETS
+When using this repository please cite this **code repository**, the related **data repository** and the **related article**. You can do so either using the `./CITATION.CFF` file or by using the following information:
+
+**code repository** 
+
+J. Smretschnig, 2026, Contrail Avoidance Non-CO2 Evaluation (CANE). 4TU.ResearchData. Software. [https://doi.org/10.4121/cbdafa47-709d-45da-86e1-7fed28ec3582](https://doi.org/10.4121/cbdafa47-709d-45da-86e1-7fed28ec3582) 
+
+**data repository**
+
+Smretschnig, Jakob; Clément, Joël; Núñez Arribas, Sergio (2026): Filed and contrail-optimised flight trajectories in Northern Europe. Version 1. 4TU.ResearchData. Dataset. [https://doi.org/10.4121/16ec2954-a493-41c8-b3f9-f17e9331c46b](https://doi.org/10.4121/16ec2954-a493-41c8-b3f9-f17e9331c46b)
+
+**article**
+
+Smretschnig, J., Yin, F., Piontek, D., Clément, J., Núñez Arribas, S., Dahlmann, K., Castino, F., and Grewe, V.: Can we achieve significant climate mitigation by optimising only for contrails?, J. Env. Com. Air Transp. Sys. Discuss. [preprint], [https://doi.org/10.5194/jecats-2026-13](https://doi.org/10.5194/jecats-2026-13), in review, 2026.
+
+
+## References
+
+### Datasets
 
 [1] Copernicus Climate Change Service, Climate Data Store, (2023): **ERA5 hourly data on pressure levels from 1940 to present**. Copernicus Climate Change Service (C3S) Climate Data Store (CDS). DOI: [10.24381/cds.bd0915c6](https://doi.org/10.24381/cds.bd0915c6)   
 
@@ -154,7 +157,7 @@ Smretschnig, Jakob (2026): Repository to evaluate the effect of contrail avoidan
 [3] Hoffmann, L. and R. Spang, Reanalysis Tropopause Data Repository, DOI: [10.26165/JUELICH-DATA/UBNGI2](https://doi.org/10.26165/JUELICH-DATA/UBNGI2), Jülich DATA, V1, 2021.
 
 
-### OTHER
+### Other
 
 **algorithmic Climate Change Function (aCCF)**
 
