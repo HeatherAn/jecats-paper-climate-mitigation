@@ -1,3 +1,23 @@
+# CODECHECK certificate 2026-022 
+This is the CODECHECK repository for the publication: [Can we achieve significant climate mitigation by optimising only for contrails?](https://doi.org/10.5194/jecats-2026-13). The code used to generate the figures of the publication is available on the TU Delft GitLab with a DOI from the 4TU.ResearchData archive:
+
+TU Delft GitLab Repository: [https://gitlab.tudelft.nl/jsmretschnig/jecats-paper-climate-mitigation](https://gitlab.tudelft.nl/jsmretschnig/jecats-paper-climate-mitigation)
+4TU.ResearchData Repository: [https://doi.org/10.4121/cbdafa47-709d-45da-86e1-7fed28ec3582](https://doi.org/10.4121/cbdafa47-709d-45da-86e1-7fed28ec3582) *DOI not yet active*
+
+This CODECHECK repository is a fork of the author's TU Delft GitLab repository associated with the publication. The CODECHECK report is published in Zenodo ([ADD ZENODO DOI OF CERTIFICATE]).
+
+## Summary
+[ADD SUMMARY]
+
+## Preparation steps
+
+## Reproducing Results
+
+### Default outputs
+
+## Codechecker
+- *Dr. Heather Andrews Mancilla* ([@HeatherAn](https://github.com/HeatherAn), ![ORCID logo](https://info.orcid.org/wp-content/uploads/2019/11/orcid_16x16.png) [0000-0002-6637-2830](https://orcid.org/0000-0002-6637-2830), H.E.AndrewsMancilla@tudelft.nl, [Technische Universiteit Delft](https://www.tudelft.nl/)  
+
 # Contrail Avoidance Non-CO2 Evaluation (CANE)
 
 This repository provides a **Python pipeline** for quantifying the **net climate benefit of contrail avoidance** accounting for the climate effects of CO$_{2}$, contrails, NO$_{x}$ and H$_{2}$O. 
