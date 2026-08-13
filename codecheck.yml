@@ -1,0 +1,54 @@
+---
+version: https://codecheck.org.uk/spec/config/1.0
+
+paper:
+  title: "Contrail Avoidance Non-CO2 Evaluation (CANE)"
+  authors:
+    - name: Jakob Smretschnig
+      ORCID: 0009-0003-6446-3039
+  reference: https://doi.org/10.5194/jecats-2026-13
+
+manifest:
+  - file: fig01.png
+    comment: manuscript Figure 1
+  - file: fig02.png
+    comment: manuscript Figure 2
+  - file: fig03.png
+    comment: manuscript Figure 3
+  - file: fig04.png
+    comment: manuscript Figure 4
+  - file: fig05.png
+    comment: manuscript Figure 5
+  - file: fig06.png
+    comment: manuscript Figure 6
+  - file: fig07.png
+    comment: manuscript Figure 7
+  - file: fig08.png
+    comment: manuscript Figure 8    
+  - file: fig09.png
+    comment: manuscript Figure 9
+  - file: fig10.png
+    comment: manuscript Figure 10
+  - file: fig11.png
+    comment: manuscript Figure 11 
+  - file: figC1.png
+    comment: manuscript Figure C1   
+  - file: figC2.png
+    comment: manuscript Figure C2
+  - file: figC3.png
+    comment: manuscript Figure C3   
+  - file: figD1.png
+    comment: manuscript Figure D1
+  - file: figE1.png
+    comment: manuscript Figure E1      
+
+codechecker:
+  - name: Heather Andrews
+    ORCID: 0000-0002-6637-2830
+
+summary: >
+  [TO DO] Reproduction of the figures shown in the manuscript. 
+repository: https://github.com/codecheckers/certificate-2026-022
+check_time: "2026-08-13 18:00:00"
+certificate: 2026-022
+report: https://doi.org/10.5281/zenodo.[TODO]
