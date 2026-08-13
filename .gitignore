@@ -4,6 +4,7 @@
 .vscode
 
 /src/cane.egg-info
+/src/cane/sankey.py
 /data
 
 **.pyc
