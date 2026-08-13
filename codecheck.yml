@@ -19,7 +19,7 @@ manifest:
     comment: manuscript Figure 4
   - file: fig05.png
     comment: manuscript Figure 5
-  - file: fig06.png
+  - file: fig06_day[6, 7]_['\''ENOB'\'', '\''ENOR'\'', '\''EKDK'\'', '\''ESAA'\'', '\''EFIN'\'', '\''EETT'\'', '\''EVRR'\''].png
     comment: manuscript Figure 6
   - file: fig07.png
     comment: manuscript Figure 7
