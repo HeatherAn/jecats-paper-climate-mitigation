@@ -8,7 +8,7 @@
 /data
 
 **.pyc
-*.png
+#*.png
 
 data/
 reports/
